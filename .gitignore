@@ -45,6 +45,7 @@ __pycache__/
 # ── Test Artifacts ─────────────────────────────────────────────
 tests/performance/results/
 tests/performance/baselines/
+.benchmarks/
 
 # ── Temporary Files ────────────────────────────────────────────
 tmp/
