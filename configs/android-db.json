@@ -1,0 +1,150 @@
+{
+  "versions": [
+    {
+      "version": "13",
+      "sdk": 33,
+      "name": "Android 13 (Tiramisu)",
+      "api_level": 33,
+      "release_date": "2022-08-15",
+      "supported_commands": [
+        "status", "report", "backup", "restore", "apply",
+        "compile", "trim-cache", "refresh-network",
+        "disable-package", "enable-package",
+        "doctor", "audit", "benchmark", "analyze",
+        "rollback", "plugin", "export", "watch",
+        "compare", "docgen", "profile-manager",
+        "enhanced-benchmark", "benchmark-history",
+        "devices", "deps-check", "release-check"
+      ],
+      "deprecated_apis": [],
+      "replacement_apis": {},
+      "oem_notes": {
+        "samsung": "One UI 5.x supported. GOS management available.",
+        "google": "Full support. No OEM-specific limitations.",
+        "oneplus": "OxygenOS 13 supported. Some settings may differ.",
+        "xiaomi": "MIUI 14. HyperOS transition begins.",
+        "nothing": "Nothing OS 1.5+. Full support.",
+        "motorola": "My UX / stock-like Android. Full support.",
+        "oppo": "ColorOS 13. Some settings in secure namespace.",
+        "vivo": "Funtouch OS 13 / OriginOS. Limited testing."
+      }
+    },
+    {
+      "version": "14",
+      "sdk": 34,
+      "name": "Android 14 (Upside Down Cake)",
+      "api_level": 34,
+      "release_date": "2023-10-04",
+      "supported_commands": [
+        "status", "report", "backup", "restore", "apply",
+        "compile", "trim-cache", "refresh-network",
+        "disable-package", "enable-package",
+        "doctor", "audit", "benchmark", "analyze",
+        "rollback", "plugin", "export", "watch",
+        "compare", "docgen", "profile-manager",
+        "enhanced-benchmark", "benchmark-history",
+        "devices", "deps-check", "release-check"
+      ],
+      "deprecated_apis": [],
+      "replacement_apis": {},
+      "oem_notes": {
+        "samsung": "One UI 6.x supported. Camera service restrictions apply.",
+        "google": "Full support. New photo picker and credential manager.",
+        "oneplus": "OxygenOS 14. Full support.",
+        "xiaomi": "HyperOS 1.0. MIUI compatibility layer.",
+        "nothing": "Nothing OS 2.0+. Full support.",
+        "motorola": "My UX / stock-like. Full support.",
+        "oppo": "ColorOS 14. Some gesture settings restricted.",
+        "vivo": "Funtouch OS 14. Limited testing."
+      }
+    },
+    {
+      "version": "15",
+      "sdk": 35,
+      "name": "Android 15",
+      "api_level": 35,
+      "release_date": "2024-10-15",
+      "supported_commands": [
+        "status", "report", "backup", "restore", "apply",
+        "compile", "trim-cache", "refresh-network",
+        "disable-package", "enable-package",
+        "doctor", "audit", "benchmark", "analyze",
+        "rollback", "plugin", "export", "watch",
+        "compare", "docgen", "profile-manager",
+        "enhanced-benchmark", "benchmark-history",
+        "devices", "deps-check", "release-check"
+      ],
+      "deprecated_apis": [],
+      "replacement_apis": {},
+      "oem_notes": {
+        "samsung": "One UI 7.x. Full support.",
+        "google": "Full support. New privacy features.",
+        "oneplus": "OxygenOS 15. Full support.",
+        "xiaomi": "HyperOS 2.0. New kernel requirements.",
+        "nothing": "Nothing OS 3.0+. Full support.",
+        "motorola": "Full support.",
+        "oppo": "ColorOS 15. Full support.",
+        "vivo": "Funtouch OS 15. OriginOS 5."
+      }
+    },
+    {
+      "version": "16",
+      "sdk": 36,
+      "name": "Android 16",
+      "api_level": 36,
+      "release_date": "2025-10-?",
+      "supported_commands": [
+        "status", "report", "backup", "restore", "apply",
+        "compile", "trim-cache", "refresh-network",
+        "disable-package", "enable-package",
+        "doctor", "audit", "benchmark", "analyze",
+        "rollback", "plugin", "export", "watch",
+        "compare", "docgen", "profile-manager",
+        "enhanced-benchmark", "benchmark-history",
+        "devices", "deps-check", "release-check"
+      ],
+      "deprecated_apis": [],
+      "replacement_apis": {},
+      "oem_notes": {
+        "samsung": "One UI 8.x expected. Compatibility assumed.",
+        "google": "Full support expected.",
+        "oneplus": "OxygenOS 16 expected.",
+        "xiaomi": "HyperOS expected.",
+        "nothing": "Nothing OS expected.",
+        "motorola": "Full support expected.",
+        "oppo": "ColorOS expected.",
+        "vivo": "Funtouch OS expected."
+      }
+    },
+    {
+      "version": "17",
+      "sdk": 37,
+      "name": "Android 17 (Preview)",
+      "api_level": 37,
+      "release_date": "2026-?",
+      "supported_commands": [
+        "status", "report", "backup", "restore",
+        "doctor", "rollback", "plugin",
+        "devices", "deps-check"
+      ],
+      "deprecated_apis": [],
+      "replacement_apis": {},
+      "oem_notes": {
+        "samsung": "Preview — no specific data yet.",
+        "google": "Preview — some APIs may change.",
+        "oneplus": "Unknown.",
+        "xiaomi": "Unknown.",
+        "nothing": "Unknown.",
+        "motorola": "Unknown.",
+        "oppo": "Unknown.",
+        "vivo": "Unknown."
+      }
+    }
+  ],
+  "meta": {
+    "description": "Android version compatibility and command support database",
+    "toolkit_min_version": "4.0.0",
+    "generated": "2026-07-23T00:00:00Z",
+    "notes": "SDK 37 (Android 17) is a preview. Commands listed as supported have been verified conceptually but may require adjustments."
+  }
+}

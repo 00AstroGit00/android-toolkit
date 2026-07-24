@@ -1,0 +1,162 @@
+{
+  "oems": {
+    "samsung": {
+      "name": "Samsung",
+      "uis": ["One UI 5", "One UI 6", "One UI 7", "One UI 8"],
+      "android_versions": ["13", "14", "15", "16", "17"],
+      "features": {
+        "gos_control": {"supported": true, "workaround": "ADB shell settings put global gos_enable 0"},
+        "ram_plus": {"supported": true, "workaround": "settings put global ram_plus_size_limit"},
+        "refresh_rate": {"supported": true, "workaround": "settings put system peak_refresh_rate"},
+        "bloatware_list": {"supported": true, "workaround": "100+ packages identified"},
+        "samsung_light_profile": {"supported": true, "workaround": "custom performance profile"},
+        "camera_service_restrict": {"supported": true, "android_min": 14, "workaround": "com.samsung.android.providers.context"},
+        "battery_guard": {"supported": true, "workaround": "settings put global battery_guard_enabled"},
+        "thermal_throttling": {"supported": true, "workaround": "settings put global thermal_throttling_enabled"},
+        "game_optimizing_service": {"supported": true, "workaround": "settings put global gos_enable 0"},
+        "app_screen_recording": {"supported": "partial", "workaround": "some models may lack"},
+        "secure_folder": {"supported": false, "reason": "Enterprise-managed"},
+        "knox": {"supported": "partial", "workaround": "Some Knox APIs require MDM"},
+        "dual_messenger": {"supported": false, "reason": "Per-app configuration varies"}
+      },
+      "validation": {
+        "tested_sdks": [33, 34, 35, 36],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb", "rish"],
+        "notes": "Primary target platform. Most extensively tested."
+      }
+    },
+    "google": {
+      "name": "Google Pixel",
+      "uis": ["Stock Android"],
+      "android_versions": ["13", "14", "15", "16", "17"],
+      "features": {
+        "adaptive_battery": {"supported": true, "workaround": "settings put global adaptive_battery_management_enabled"},
+        "adaptive_charging": {"supported": true, "android_min": 14},
+        "pixel_stand": {"supported": false, "reason": "Hardware-dependent"},
+        "call_screening": {"supported": false, "reason": "Requires Google Play Services"},
+        "extend_unlock": {"supported": false, "reason": "Google-specific setting"},
+        "at_a_glance": {"supported": false, "reason": "Pixel Launcher feature"}
+      },
+      "validation": {
+        "tested_sdks": [33, 34, 35],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb", "rish"],
+        "notes": "Best Android compatibility. Few OEM-specific restrictions."
+      }
+    },
+    "oneplus": {
+      "name": "OnePlus",
+      "uis": ["OxygenOS 13", "OxygenOS 14", "OxygenOS 15"],
+      "android_versions": ["13", "14", "15"],
+      "features": {
+        "high_performance_mode": {"supported": true, "workaround": "settings put global oneplus_high_performance_mode"},
+        "ram_expansion": {"supported": true, "workaround": "settings put global ram_expansion_size"},
+        "hyper_touch": {"supported": true, "workaround": "settings put system hyper_touch_enable"},
+        "game_mode": {"supported": "partial", "workaround": "varies by OxygenOS version"},
+        "dc_dimming": {"supported": "partial", "workaround": "Some models only"}
+      },
+      "validation": {
+        "tested_sdks": [33, 34],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb"],
+        "notes": "OxygenOS 15 compatibility assumed but untested."
+      }
+    },
+    "nothing": {
+      "name": "Nothing",
+      "uis": ["Nothing OS 1.5", "Nothing OS 2.0", "Nothing OS 3.0"],
+      "android_versions": ["13", "14", "15"],
+      "features": {
+        "glyph_interface": {"supported": false, "reason": "Hardware-specific"},
+        "nothing_widgets": {"supported": false, "reason": "Launcher-specific"},
+        "nothing_camera": {"supported": false, "reason": "Camera app-specific"}
+      },
+      "validation": {
+        "tested_sdks": [33, 34],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb"],
+        "notes": "Close to stock Android. Most generic commands work."
+      }
+    },
+    "xiaomi": {
+      "name": "Xiaomi",
+      "uis": ["MIUI 14", "HyperOS 1.0", "HyperOS 2.0"],
+      "android_versions": ["13", "14", "15"],
+      "features": {
+        "memory_extension": {"supported": true, "workaround": "settings put global memory_extension_enabled"},
+        "game_turbo": {"supported": "partial", "workaround": "varies by HyperOS version"},
+        "second_space": {"supported": false, "reason": "MIUI-specific feature"},
+        "dual_apps": {"supported": false, "reason": "Launcher-specific"}
+      },
+      "validation": {
+        "tested_sdks": [33, 34],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb"],
+        "notes": "HyperOS uses different namespace for some settings."
+      }
+    },
+    "motorola": {
+      "name": "Motorola",
+      "uis": ["My UX", "Stock Android"],
+      "android_versions": ["13", "14", "15"],
+      "features": {
+        "moto_actions": {"supported": false, "reason": "Moto app-specific"},
+        "moto_display": {"supported": false, "reason": "Hardware-dependent"},
+        "ready_for": {"supported": false, "reason": "Motorola-specific"}
+      },
+      "validation": {
+        "tested_sdks": [33, 34],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb"],
+        "notes": "Close to stock. Most settings apply directly."
+      }
+    },
+    "oppo": {
+      "name": "Oppo",
+      "uis": ["ColorOS 13", "ColorOS 14"],
+      "android_versions": ["13", "14"],
+      "features": {
+        "memory_boost": {"supported": true, "workaround": "settings put global oppo_memory_boost"},
+        "super_power_saving": {"supported": false, "reason": "ColorOS-specific"},
+        "smart_sidebar": {"supported": false, "reason": "ColorOS-specific"}
+      },
+      "validation": {
+        "tested_sdks": [33, 34],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb"],
+        "notes": "Some settings in secure namespace require rish."
+      }
+    },
+    "vivo": {
+      "name": "Vivo",
+      "uis": ["Funtouch OS 13", "Funtouch OS 14", "OriginOS"],
+      "android_versions": ["13", "14"],
+      "features": {
+        "ultra_game_mode": {"supported": false, "reason": "Funtouch-specific"},
+        "memory_boost": {"supported": true, "workaround": "settings put global vivo_memory_boost"},
+        "ai_optimization": {"supported": false, "reason": "Vivo-specific"}
+      },
+      "validation": {
+        "tested_sdks": [33],
+        "verified": true,
+        "last_validated": "2026-07-23",
+        "backends_tested": ["adb"],
+        "notes": "Limited testing. OriginOS may differ significantly."
+      }
+    }
+  },
+  "meta": {
+    "description": "OEM validation profiles for cross-device testing",
+    "toolkit_min_version": "4.1.0",
+    "generated": "2026-07-23T00:00:00Z",
+    "format_version": 1
+  }
+}

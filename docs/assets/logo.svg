@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#1a1a2e" stroke="#3DDC84" stroke-width="3"/>
+  <!-- Android bot head -->
+  <ellipse cx="64" cy="52" rx="24" ry="20" fill="#3DDC84"/>
+  <!-- Antennae -->
+  <line x1="44" y1="36" x2="38" y2="20" stroke="#3DDC84" stroke-width="3" stroke-linecap="round"/>
+  <line x1="84" y1="36" x2="90" y2="20" stroke="#3DDC84" stroke-width="3" stroke-linecap="round"/>
+  <!-- Eyes -->
+  <circle cx="54" cy="48" r="3" fill="#1a1a2e"/>
+  <circle cx="74" cy="48" r="3" fill="#1a1a2e"/>
+  <!-- Body -->
+  <rect x="44" y="70" width="40" height="16" rx="4" fill="#3DDC84"/>
+  <!-- Left arm -->
+  <line x1="44" y1="74" x2="30" y2="90" stroke="#3DDC84" stroke-width="4" stroke-linecap="round"/>
+  <line x1="30" y1="90" x2="26" y2="86" stroke="#3DDC84" stroke-width="4" stroke-linecap="round"/>
+  <!-- Right arm -->
+  <line x1="84" y1="74" x2="98" y2="90" stroke="#3DDC84" stroke-width="4" stroke-linecap="round"/>
+  <line x1="98" y1="90" x2="102" y2="86" stroke="#3DDC84" stroke-width="4" stroke-linecap="round"/>
+  <!-- Legs -->
+  <line x1="50" y1="86" x2="46" y2="106" stroke="#3DDC84" stroke-width="4" stroke-linecap="round"/>
+  <line x1="78" y1="86" x2="82" y2="106" stroke="#3DDC84" stroke-width="4" stroke-linecap="round"/>
+  <!-- Text -->
+  <text x="64" y="122" font-family="monospace" font-size="8" fill="#ffffff" text-anchor="middle">TOOLKIT</text>
+</svg>

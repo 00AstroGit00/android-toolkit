@@ -1,0 +1,62 @@
+# ── Build Artifacts ──────────────────────────────────────────────
+dist/
+*.zip
+*.tar.gz
+*.sha256
+*.sha512
+manifest.json
+
+# ── Logs ────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Backups (runtime) ──────────────────────────────────────────
+backups/
+
+# ── OS Metadata ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# ── Editor Files ───────────────────────────────────────────────
+.idea/
+.vscode/
+*.sublime-*
+*.sublime-workspace
+.vscode/settings.json
+
+# ── IDE Project Files ──────────────────────────────────────────
+*.iml
+.idea/workspace.xml
+.idea/tasks/
+*.ipr
+*.iws
+
+# ── Python / Node (if any) ─────────────────────────────────────
+node_modules/
+__pycache__/
+*.pyc
+.env
+.venv/
+
+# ── Test Artifacts ─────────────────────────────────────────────
+tests/performance/results/
+tests/performance/baselines/
+
+# ── Temporary Files ────────────────────────────────────────────
+tmp/
+.tmp/
+*.tmp
+.tmp_*
+.out
+.err
+
+# ── GPG / Secrets (never commit) ───────────────────────────────
+*.asc
+*.gpg
+*.pem
+*.key
+secrets/

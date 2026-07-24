@@ -1,0 +1,528 @@
+{
+  "version": "2.0.0",
+  "description": "Android Toolkit Settings Database — canonical reference for all supported settings",
+  "last_updated": "2026-07-24",
+
+  "global": {
+    "window_animation_scale": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1.0",
+      "recommended": "0.5",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Animation speed. 0=off, 0.5x=fast, 1.0x=default, 1.5x=slow. Affects perceived UI speed."
+    },
+    "transition_animation_scale": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1.0",
+      "recommended": "0.5",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Transition animation speed between apps/screens."
+    },
+    "animator_duration_scale": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1.0",
+      "recommended": "0.5",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Animator duration multiplier. Affects all animated UI elements."
+    },
+    "force_gpu_rendering": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0",
+      "recommended": "1",
+      "risk": "low",
+      "requires_reboot": true,
+      "rollback": true,
+      "note": "Force GPU rendering for 2D drawing. May improve performance on some devices."
+    },
+    "cached_apps_freezer": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Freeze cached apps to prevent wake-ups. Saves battery."
+    },
+    "disable_window_blurs": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Disable window blur effects. Reduces GPU load. Android 12+."
+    },
+    "accessibility_reduce_transparency": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Reduce UI transparency. Saves GPU cycles on OLED displays."
+    },
+    "low_power": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Battery saver mode. 1=on, 0=off."
+    },
+    "automatic_power_save_mode": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "0",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: automatically enable power saving based on usage."
+    },
+    "dynamic_power_savings_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: dynamic power savings adjusts based on usage patterns."
+    },
+    "app_restriction_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Restrict background activity for unused apps."
+    },
+    "mobile_data_always_on": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "low",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Keep mobile data always on. 0=saves battery but may slow reconnection."
+    },
+    "ble_scan_always_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Bluetooth Low Energy scanning. Disable to save battery."
+    },
+    "wifi_scan_always_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "WiFi scanning always active. Disable for battery savings."
+    },
+    "wifi_power_save": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "low",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "WiFi power save mode. 0=max throughput, 1=max battery."
+    },
+    "adaptive_battery_management_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "medium",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Adaptive battery. Some users report better battery with this disabled. Community-debated."
+    },
+    "zram_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "low",
+      "requires_reboot": true,
+      "rollback": true,
+      "note": "Samsung: ZRAM swap. Disabling may improve performance on devices with enough RAM."
+    },
+    "ram_expand_size_list": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "0,1,2,4,6,8",
+      "recommended": "0",
+      "risk": "low",
+      "requires_reboot": true,
+      "rollback": true,
+      "note": "Samsung: allowed RAM Plus sizes. 0 disables RAM Plus."
+    },
+    "ram_expand_size": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "0",
+      "recommended": "0",
+      "risk": "low",
+      "requires_reboot": true,
+      "rollback": true,
+      "note": "Samsung: current RAM Plus size in GB. 0=disabled."
+    },
+    "sem_enhanced_cpu_responsiveness": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "low",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: CPU boost on interaction. 0=saves battery, 1=max responsiveness."
+    },
+    "enhanced_processing": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "0",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: enhanced processing mode. May increase battery drain."
+    },
+    "send_action_events": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Send diagnostic/action data. 0=disable for privacy."
+    },
+    "device_scanning_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: device scanning for nearby devices."
+    },
+    "network_scoring_ui_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Network scoring indicator in UI."
+    },
+    "network_recommendations_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Network recommendations notifications."
+    },
+    "tether_offload_disabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Disable tethering offload. Keep default unless tethering issues."
+    },
+    "activity_starts_logging_enabled": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Log activity starts. Disable for privacy and slight performance gain."
+    },
+    "private_dns_mode": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "automatic",
+      "recommended": "hostname",
+      "risk": "low",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Private DNS mode: off, automatic, hostname."
+    },
+    "private_dns_specifier": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "",
+      "recommended": "dns.adguard.com",
+      "risk": "low",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Private DNS provider hostname. Requires private_dns_mode=hostname."
+    },
+    "performance_profile": {
+      "min_android": 15,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung One UI 7+: 0=Light, 1=Standard. Light caps CPU for battery."
+    }
+  },
+
+  "secure": {
+    "long_press_timeout": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "400",
+      "recommended": "250",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Long press timeout in ms. Lower = faster context menu."
+    },
+    "multi_press_timeout": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "400",
+      "recommended": "250",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Multi-press timeout. Lower = faster gesture response."
+    },
+    "tap_duration_threshold": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0.5",
+      "recommended": "0.0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Tap duration threshold. 0.0 disables tap-and-hold filtering."
+    },
+    "touch_blocking_period": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0.1",
+      "recommended": "0.0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Touch blocking period after gesture. 0=instant next touch."
+    },
+    "night_mode": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "0",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Dark mode: 0=off, 1=on, 2=scheduled (varies by OEM)."
+    },
+    "adaptive_sleep": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: adaptive sleep based on face/attention. Disable for battery."
+    },
+    "send_action_app_error": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "all",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Send app error reports. Disable for privacy."
+    },
+    "gamesdk_version": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "",
+      "recommended": "0",
+      "risk": "medium",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: GameSDK version override. 0=disable GOS frequency scaling."
+    },
+    "game_home_enable": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "medium",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: Game Home enable. 0=disable Game Home/GOS integration."
+    },
+    "game_bixby_block": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "0",
+      "recommended": "1",
+      "risk": "low",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: block Bixby during games. 1=block."
+    },
+    "game_auto_temperature_control": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "medium",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: auto temperature control during games. 0=disable throttling."
+    }
+  },
+
+  "system": {
+    "peak_refresh_rate": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "120.0",
+      "recommended": "60.0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: peak display refresh rate in Hz. Values: 0.1, 60.0, 90.0, 96.0, 120.0."
+    },
+    "min_refresh_rate": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "60.0",
+      "recommended": "60.0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: minimum display refresh rate in Hz."
+    },
+    "multicore_packet_scheduler": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "0",
+      "recommended": "1",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: multi-core packet scheduler. 1=better network throughput."
+    },
+    "android.wallpaper.settings_systemui_transparency": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: SystemUI wallpaper transparency. 0=opaque, saves GPU."
+    },
+    "intelligent_sleep_mode": {
+      "min_android": 13,
+      "max_android": 16,
+      "oem": "samsung",
+      "default": "1",
+      "recommended": "0",
+      "risk": "safe",
+      "requires_reboot": false,
+      "rollback": true,
+      "note": "Samsung: intelligent sleep mode. Disable for battery savings."
+    }
+  },
+
+  "metadata": {
+    "total_settings": 38,
+    "namespaces": ["global", "secure", "system"],
+    "risk_levels": ["safe", "low", "medium", "high", "critical"],
+    "supported_android": ["13", "14", "15", "16"],
+    "supported_oems": ["all", "samsung", "google", "oneplus", "xiaomi"]
+  }
+}

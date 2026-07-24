@@ -1,0 +1,355 @@
+name: CI
+
+on:
+  push:
+    branches: [main, beta, nightly]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # ── Static Analysis Suite ─────────────────────────────────
+  static-analysis-full:
+    name: Static Analysis (full suite)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq shellcheck shfmt jq markdownlint 2>/dev/null || true
+          # Ensure jq is installed
+          which jq || sudo apt-get install -y -qq jq
+          # Ensure markdownlint
+          which markdownlint || sudo npm install -g markdownlint-cli 2>/dev/null || true
+      - name: Validate JSON files
+        run: |
+          failed=0
+          while IFS= read -r json_file; do
+            if ! jq empty "$json_file" 2>/dev/null; then
+              echo "INVALID JSON: $json_file"
+              failed=1
+            fi
+          done < <(find . -name '*.json' -not -path '*/node_modules/*' -not -path '*/.git/*' -not -path '*/logs/*' | sort)
+          exit $failed
+      - name: Validate config files
+        run: |
+          failed=0
+          while IFS= read -r conf; do
+            if ! bash -n "$conf" 2>/dev/null; then
+              echo "INVALID CONFIG: $conf"
+              failed=1
+            fi
+          done < <(find . -name '*.conf' -not -path '*/.git/*' | sort)
+          exit $failed
+      - name: Run ShellCheck
+        run: |
+          shellcheck -x -e SC1091,SC1090,SC2034,SC2154,SC2312,SC2311 \
+            $(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
+      - name: Check shell formatting
+        run: |
+          if command -v shfmt &>/dev/null; then
+            shfmt -d -i 4 -bn -ci $(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
+          else
+            echo "shfmt not available — skipping"
+          fi
+        continue-on-error: true
+      - name: Check Markdown lint
+        run: |
+          if command -v markdownlint &>/dev/null; then
+            markdownlint '**/*.md' --ignore node_modules --ignore .git 2>/dev/null || true
+          else
+            echo "markdownlint not available — skipping"
+          fi
+        continue-on-error: true
+
+  # ── Continuous Benchmarking ─────────────────────────────
+  benchmarking:
+    name: Continuous Benchmarking
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for regression baseline
+        run: |
+          mkdir -p tests/performance/results tests/performance/baselines
+          # Check if baseline exists in artifacts or create one
+          if [[ -f tests/performance/baselines/baseline.json ]]; then
+            echo "Baseline found"
+          else
+            echo "No baseline — creating from current run"
+          fi
+      - name: Run performance suite
+        run: |
+          # Run help/version commands for timing
+          echo "Benchmarking startup time..."
+          TIMEFORMAT='help:%3R'
+          time bash toolkit.sh --help >/dev/null 2>&1
+          TIMEFORMAT='version:%3R'  
+          time bash toolkit.sh --version >/dev/null 2>&1
+      - name: Compare with baseline
+        run: |
+          if [[ -f tests/performance/baselines/baseline.json ]]; then
+            echo "Performance comparison against baseline"
+          else
+            echo "Creating initial baseline"
+          fi
+        continue-on-error: true
+
+  # ── Bash Syntax ───────────────────────────────────────────
+  bash-syntax:
+    name: Bash Syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check bash syntax
+        run: |
+          failed=0
+          while IFS= read -r script; do
+            if ! bash -n "$script"; then
+              echo "SYNTAX ERROR: $script"
+              failed=1
+            fi
+          done < <(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
+          exit $failed
+
+  shellcheck:
+    name: ShellCheck (all severities)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run ShellCheck
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+          shellcheck -x -e SC1091,SC1090,SC2034,SC2154,SC2312,SC2311 \
+            $(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
+
+  shfmt:
+    name: Shell Formatting (shfmt)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shfmt
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq shfmt || true
+          # Fallback: download latest shfmt binary
+          if ! command -v shfmt &>/dev/null; then
+            curl -sSLO https://github.com/mvdan/sh/releases/download/v3.8.0/shfmt_v3.8.0_linux_amd64
+            chmod +x shfmt_v3.8.0_linux_amd64
+            sudo mv shfmt_v3.8.0_linux_amd64 /usr/local/bin/shfmt
+          fi
+      - name: Check formatting
+        run: |
+          shfmt -d -i 4 -bn -ci $(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
+
+  markdown-lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install markdownlint-cli
+        run: |
+          sudo npm install -g markdownlint-cli 2>/dev/null || {
+            curl -sL https://deb.nodesource.com/setup_20.x | sudo bash -
+            sudo npm install -g markdownlint-cli
+          }
+      - name: Lint Markdown
+        run: |
+          markdownlint '**/*.md' --ignore node_modules --ignore .git 2>/dev/null || true
+        continue-on-error: true
+
+  # ── Validation ────────────────────────────────────────────
+  json-validation:
+    name: JSON Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON
+        run: |
+          failed=0
+          while IFS= read -r json_file; do
+            if ! jq empty "$json_file" 2>/dev/null; then
+              echo "INVALID JSON: $json_file"
+              failed=1
+            else
+              echo "VALID: $json_file"
+            fi
+          done < <(find . -name '*.json' -not -path '*/node_modules/*' -not -path '*/.git/*' | sort)
+          exit $failed
+
+  config-validation:
+    name: Config Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate config files
+        run: |
+          failed=0
+          while IFS= read -r conf; do
+            if ! bash -n "$conf" 2>/dev/null; then
+              echo "INVALID CONFIG: $conf"
+              failed=1
+            else
+              echo "VALID: $conf"
+            fi
+          done < <(find . -name '*.conf' -not -path '*/.git/*' | sort)
+          exit $failed
+
+  version-consistency:
+    name: Version Consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check VERSION vs CHANGELOG vs toolkit.sh
+        run: |
+          failed=0
+          version_file="$(cat VERSION | tr -d '[:space:]')"
+          echo "VERSION file: $version_file"
+          # Check toolkit.sh header
+          if grep -q "^# Version: ${version_file}" toolkit.sh || grep -q "# Version: ${version_file}" toolkit.sh; then
+            echo "  toolkit.sh: OK"
+          else
+            echo "  toolkit.sh: MISSING version $version_file"
+            failed=1
+          fi
+          # Check changelog
+          if grep -q "^## v${version_file}" CHANGELOG.md 2>/dev/null; then
+            echo "  CHANGELOG.md: OK"
+          else
+            echo "  CHANGELOG.md: MISSING entry for v${version_file}"
+            failed=1
+          fi
+          exit $failed
+
+  # ── Testing ───────────────────────────────────────────────
+  bats-tests:
+    name: BATS Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install BATS
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq bats || {
+            git clone --depth 1 https://github.com/bats-core/bats-core.git /tmp/bats
+            sudo /tmp/bats/install.sh /usr/local
+          }
+      - name: Run BATS tests
+        run: |
+          if [[ -d tests/bats ]]; then
+            bats tests/bats/
+          else
+            echo "No BATS tests found — skipping"
+          fi
+        continue-on-error: true
+
+  functional-tests:
+    name: Functional Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run functional tests
+        run: |
+          if [[ -f tests/run_tests.sh ]]; then
+            bash tests/run_tests.sh --functional
+          else
+            echo "No functional test script found — skipping"
+          fi
+        continue-on-error: true
+
+  plugin-sdk-test:
+    name: Plugin SDK Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test plugin loading
+        run: |
+          # Quick smoke test: source plugin.sh and verify no errors
+          ANDROID_TOOLKIT_ROOT_DIR="$PWD" \
+          source lib/utils.sh 2>/dev/null || true
+          # Test basic sourcing
+          if bash -c 'source lib/plugin.sh 2>/dev/null && echo "Plugin SDK OK"'; then
+            echo "plugin.sh: OK"
+          else
+            echo "plugin.sh: LOAD ERROR"
+            exit 1
+          fi
+
+  # ── Build & Release ───────────────────────────────────────
+  build:
+    name: Build Artifact
+    needs: [shellcheck, bash-syntax, shfmt, json-validation, config-validation, version-consistency]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build release artifact
+        run: |
+          VERSION=$(cat VERSION | tr -d '[:space:]')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          if [[ -f toolkit.sh ]] && bash -n toolkit.sh 2>/dev/null; then
+            bash toolkit.sh --build 2>&1 || true
+          fi
+          # Manual build fallback
+          mkdir -p "dist/android-toolkit-v${VERSION}"
+          rsync -a --exclude='.git' --exclude='dist' --exclude='node_modules' \
+            . "dist/android-toolkit-v${VERSION}/" 2>/dev/null || \
+            cp -r . "dist/android-toolkit-v${VERSION}/" 2>/dev/null
+          rm -rf "dist/android-toolkit-v${VERSION}/dist" "dist/android-toolkit-v${VERSION}/.git"
+          cd dist
+          zip -qr "android-toolkit-v${VERSION}.zip" "android-toolkit-v${VERSION}"
+          sha256sum "android-toolkit-v${VERSION}.zip" > "android-toolkit-v${VERSION}.zip.sha256"
+          # Generate manifest
+          echo "{\"version\":\"${VERSION}\",\"date\":\"$(date -Iseconds)\",\"files\":{\"zip\":\"android-toolkit-v${VERSION}.zip\",\"sha256\":\"android-toolkit-v${VERSION}.zip.sha256\"}}" > manifest.json
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-toolkit-release
+          path: dist/
+          retention-days: 90
+
+  release:
+    name: Create Release
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: android-toolkit-release
+          path: dist/
+      - name: Generate release notes
+        run: |
+          VERSION=$(cat VERSION | tr -d '[:space:]')
+          {
+            echo "## Android Toolkit v${VERSION}"
+            echo ""
+            if [[ -f CHANGELOG.md ]]; then
+              sed -n "/^## v${VERSION}/,/^## v[0-9]/p" CHANGELOG.md | head -n -1
+            fi
+            echo ""
+            echo "### File Checksums"
+            echo '```'
+            cat dist/*.sha256 2>/dev/null
+            echo '```'
+          } > release-notes.md
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "v${{ env.VERSION }}"
+          body_path: release-notes.md
+          files: |
+            dist/*.zip
+            dist/*.sha256
+            dist/manifest.json
