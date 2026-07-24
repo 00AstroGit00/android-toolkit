@@ -89,10 +89,10 @@ for bats_file in "$ANDROID_TOOLKIT_ROOT_DIR"/tests/bats/*.bats; do
     echo ""
     
     # Parse BATS file: extract @test blocks
-    local current_name=""
-    local current_body=""
-    local in_test=false
-    local brace_depth=0
+    current_name=""
+    current_body=""
+    in_test=false
+    brace_depth=0
     
     while IFS= read -r line; do
         if [[ "$line" =~ @test\ \"(.*)\"\ \{ ]]; then
@@ -106,8 +106,8 @@ for bats_file in "$ANDROID_TOOLKIT_ROOT_DIR"/tests/bats/*.bats; do
             brace_depth=0
         elif $in_test; then
             # Count braces to know when test ends
-            local open_braces=$(echo "$line" | tr -cd '{' | wc -c)
-            local close_braces=$(echo "$line" | tr -cd '}' | wc -c)
+            open_braces="$(echo "$line" | tr -cd '{' | wc -c)"
+            close_braces="$(echo "$line" | tr -cd '}' | wc -c)"
             brace_depth=$((brace_depth + open_braces - close_braces))
             if [[ "$brace_depth" -le 0 && "$line" == "}" ]]; then
                 # End of test
