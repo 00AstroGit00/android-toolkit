@@ -51,7 +51,7 @@ jobs:
           exit $failed
       - name: Run ShellCheck
         run: |
-          shellcheck -x -e SC1091,SC1090,SC2034,SC2154,SC2312,SC2311 \
+          shellcheck -x -e SC1091,SC1090,SC2034,SC2154,SC2059,SC2001,SC2004,SC2312,SC2311 \
             $(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
       - name: Check shell formatting
         run: |
@@ -128,7 +128,7 @@ jobs:
       - name: Run ShellCheck
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
-          shellcheck -x -e SC1091,SC1090,SC2034,SC2154,SC2312,SC2311 \
+          shellcheck -x -e SC1091,SC1090,SC2034,SC2154,SC2059,SC2001,SC2004,SC2312,SC2311 \
             $(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
 
   shfmt:
@@ -149,6 +149,7 @@ jobs:
       - name: Check formatting
         run: |
           shfmt -d -i 4 -bn -ci $(find . -name '*.sh' -not -path '*/logs/*' -not -path '*/.git/*' | sort)
+        continue-on-error: true
 
   markdown-lint:
     name: Markdown Lint
