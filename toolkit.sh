@@ -949,11 +949,18 @@ _main() {
             fi
             ;;
         tui)
-            _load_module "tui" 2>/dev/null || {
-                log_error "TUI module not available"
-                exit 1
-            }
-            tui_main
+            local _loader="${ANDROID_TOOLKIT_ROOT_DIR}/modules/dashboard/loader.sh"
+            if [[ -f "$_loader" ]]; then
+                source "$_loader"
+                dashboard_launch
+            else
+                # Fallback to legacy TUI
+                _load_module "tui" 2>/dev/null || {
+                    log_error "Dashboard module not available"
+                    exit 1
+                }
+                tui_main
+            fi
             ;;
         build)
             _load_module "builder" 2>/dev/null || {
@@ -963,8 +970,15 @@ _main() {
             builder_run
             ;;
         "")
-            log_error "No action specified. Use --help to see available actions."
-            exit 1
+            # Launch interactive dashboard by default
+            local _loader="${ANDROID_TOOLKIT_ROOT_DIR}/modules/dashboard/loader.sh"
+            if [[ -f "$_loader" ]]; then
+                source "$_loader"
+                dashboard_launch
+            else
+                log_error "No action specified. Use --help to see available actions."
+                exit 1
+            fi
             ;;
         *)
             log_error "Unimplemented action: $ACTION"
