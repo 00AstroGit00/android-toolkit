@@ -235,6 +235,7 @@ jobs:
   bats-tests:
     name: BATS Unit Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - name: Install BATS
