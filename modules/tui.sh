@@ -73,11 +73,11 @@ tui_menu() {
     shift 2
 
     case "$TUI_BACKEND" in
-        dialog)
-            dialog --clear --title "$title" --menu "$text" 20 60 10 "$@" 2>&1
-            ;;
-        whiptail)
-            whiptail --clear --title "$title" --menu "$text" 20 60 10 "$@" 2>&1
+        dialog|whiptail)
+            # 3>&1 1>&2 2>&3 swaps stdout/stderr so the selected tag
+            # (written to stderr) is captured by $() while the display
+            # (written to stdout) goes to the terminal.
+            "$TUI_BACKEND" --clear --title "$title" --menu "$text" 0 0 0 "$@" 3>&1 1>&2 2>&3
             ;;
         *)
             echo "Select an option:"
@@ -100,8 +100,9 @@ tui_menu() {
 tui_input() {
     local title="$1" text="$2" default="${3:-}"
     case "$TUI_BACKEND" in
-        dialog)  dialog --title "$title" --inputbox "$text" 10 60 "$default" 2>&1 ;;
-        whiptail) whiptail --title "$title" --inputbox "$text" 10 60 "$default" 2>&1 ;;
+        dialog|whiptail)
+            "$TUI_BACKEND" --title "$title" --inputbox "$text" 10 60 "$default" 3>&1 1>&2 2>&3
+            ;;
         *)       read -p "$text: " _input; echo "$_input" ;;
     esac
 }
@@ -141,11 +142,8 @@ tui_checklist() {
     shift 2
 
     case "$TUI_BACKEND" in
-        dialog)
-            dialog --clear --title "$title" --checklist "$text" 15 60 10 "$@" 2>&1
-            ;;
-        whiptail)
-            whiptail --clear --title "$title" --checklist "$text" 15 60 10 "$@" 2>&1
+        dialog|whiptail)
+            "$TUI_BACKEND" --clear --title "$title" --checklist "$text" 15 60 10 "$@" 3>&1 1>&2 2>&3
             ;;
         *)
             echo "Select items (comma-separated numbers):"
