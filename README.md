@@ -9,15 +9,15 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/version-4.2.0--stable-blue?style=flat-square" alt="Version 4.2.0 Stable"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License"/></a>
+  <a href="https://github.com/00AstroGit00/android-toolkit/releases/tag/v4.2.0"><img src="https://img.shields.io/github/v/release/00AstroGit00/android-toolkit?style=flat-square&label=version&color=blue" alt="Version 4.2.0 Stable"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/00AstroGit00/android-toolkit?style=flat-square&color=green" alt="MIT License"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Android-13--16-3DDC84?style=flat-square&logo=android" alt="Android 13-16"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Samsung_One_UI-5--8-1428A0?style=flat-square" alt="One UI 5-8"/></a>
   <a href="#"><img src="https://img.shields.io/badge/adb-✓-brightgreen?style=flat-square" alt="ADB"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Shizuku-✓-brightgreen?style=flat-square" alt="Shizuku"/></a>
   <a href="#"><img src="https://img.shields.io/badge/bash_4.4+-✓-brightgreen?style=flat-square" alt="Bash 4.4+"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/PRs-welcome-orange?style=flat-square" alt="PRs Welcome"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/LTS-H2_2026--2028+-important?style=flat-square" alt="LTS H2 2026-2028+"/></a>
+  <a href="https://github.com/00AstroGit00/android-toolkit/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"><img src="https://img.shields.io/badge/PRs-welcome-orange?style=flat-square" alt="PRs Welcome"/></a>
+  <a href="LTS-POLICY.md"><img src="https://img.shields.io/badge/LTS-H2_2026--2028+-important?style=flat-square" alt="LTS H2 2026-2028+"/></a>
 </p>
 
 <p align="center">
@@ -515,7 +515,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for:
 **Quick start:**
 ```bash
 # Fork and clone
-git clone https://github.com/YOUR_USERNAME/android-toolkit.git
+git clone https://github.com/00AstroGit00/android-toolkit.git
 cd android-toolkit
 
 # Run syntax checks
@@ -559,7 +559,7 @@ Copyright (c) 2026 Android Toolkit Contributors
 - [BATS](https://github.com/bats-core/bats-core) — Bash testing framework
 - [ShellCheck](https://www.shellcheck.net/) — Shell script analysis
 - [mvdan/sh](https://github.com/mvdan/sh) — Shell formatter (shfmt)
-- All [contributors](https://github.com/YOUR_USERNAME/android-toolkit/graphs/contributors) who have helped improve the toolkit
+- All [contributors](https://github.com/00AstroGit00/android-toolkit/graphs/contributors) who have helped improve the toolkit
 
 ---
 

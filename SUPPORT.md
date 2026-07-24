@@ -21,14 +21,14 @@ Start with the project documentation — most questions are answered there:
 1. **Check the docs first** — see the table above.
 2. **Search existing issues** — your question may have been answered already.
 3. **Open an issue** if you can't find an answer:
-   - [Bug Report](https://github.com/YOUR_USERNAME/android-toolkit/issues/new?template=01-bug-report.md)
-   - [Documentation Issue](https://github.com/YOUR_USERNAME/android-toolkit/issues/new?template=06-documentation-issue.md)
-   - [Plugin Issue](https://github.com/YOUR_USERNAME/android-toolkit/issues/new?template=05-plugin-issue.md)
+   - [Bug Report](https://github.com/00AstroGit00/android-toolkit/issues/new?template=01-bug-report.md)
+   - [Documentation Issue](https://github.com/00AstroGit00/android-toolkit/issues/new?template=06-documentation-issue.md)
+   - [Plugin Issue](https://github.com/00AstroGit00/android-toolkit/issues/new?template=05-plugin-issue.md)
 
 ## Community
 
 - **Discussions**: GitHub Discussions (if enabled)
-- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/android-toolkit/issues)
+- **Issues**: [GitHub Issues](https://github.com/00AstroGit00/android-toolkit/issues)
 
 ## Commercial Support
 
