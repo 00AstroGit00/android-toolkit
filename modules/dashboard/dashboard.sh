@@ -51,9 +51,13 @@ dashboard_register_page() {
 dashboard_navigate() {
     local target="$1"
     [[ "$target" == "$DASHBOARD_CURRENT_PAGE" ]] && return
-    DASHBOARD_PREV_PAGE="$DASHBOARD_CURRENT_PAGE"
+    local prev="$DASHBOARD_CURRENT_PAGE"
+    DASHBOARD_PREV_PAGE="$prev"
     DASHBOARD_CURRENT_PAGE="$target"
     DASHBOARD_REDRAW_NEEDED=true
+
+    # Record navigation in audit trail
+    audit_record "Navigation" "$prev → $target" "" "info"
 
     # Update sidebar index
     local idx
@@ -214,16 +218,28 @@ dashboard_event_loop() {
     _dashboard_redraw
 
     local last_refresh=0
-    local refresh_interval=3
+    local last_autosave=0
+    local refresh_interval
+    refresh_interval="$(enterprise_get "auto_refresh" "3")"
 
     while "$DASHBOARD_RUNNING"; do
         # Periodic auto-refresh
         local now
         now="$(date +%s)"
-        if (( now - last_refresh >= refresh_interval )); then
+        # Check enterprise settings for dynamic refresh interval
+        refresh_interval="$(enterprise_get "auto_refresh" "3")"
+        if (( refresh_interval > 0 && now - last_refresh >= refresh_interval )); then
             status_refresh
             DASHBOARD_REDRAW_NEEDED=true
             last_refresh=$now
+        fi
+
+        # Auto-save session if enabled
+        local autosave
+        autosave="$(enterprise_get "session_autosave" "false")"
+        if [[ "$autosave" == "true" ]] && (( now - last_autosave >= 120 )); then
+            session_save "autosave" 2>/dev/null || true
+            last_autosave=$now
         fi
 
         # Redraw if needed
@@ -335,6 +351,15 @@ dashboard_run() {
     renderer_init
     menu_detect
     theme_load "${THEME_NAME:-dark}"
+
+    # Initialize Phase 4 subsystems
+    event_bus_init
+    twin_init
+    timeline_init
+    report_studio_init
+    recovery_init
+    profiles_init
+    offline_init
 
     # Register all page handlers
     dashboard_register_all_pages

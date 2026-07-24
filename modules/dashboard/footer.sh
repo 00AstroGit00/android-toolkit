@@ -74,6 +74,96 @@ footer_render() {
         performance|optimization|packages|bloatware|battery|display|network|security|plugins|reports|benchmarks|validation|compatibility|logs|settings|help|about)
             shortcuts_str=" ↑↓ Navigate  |  Enter Select  |  F1 Help  |  ESC Back  |  Q Quit"
             ;;
+        multi_device)
+            shortcuts_str=" ↑↓ Select  |  Space Toggle  |  B Broadcast  |  G Group   |  F1 Help  |  ESC Back"
+            ;;
+        device_compare)
+            shortcuts_str=" ↑↓ Scroll  |  F5 Refresh  |  F1 Help  |  ESC Back  |  Q Quit"
+            ;;
+        ai_assistant)
+            shortcuts_str=" h Health  |  o Optimize  |  b Battery  |  s Security  |  t Storage  |  m Memory  |  ? Help  |  ESC Back"
+            ;;
+        terminal)
+            shortcuts_str=" Type command + Enter  |  ↑↓ History  |  T Toggle Safe  |  C Clear  |  F1 Help  |  ESC Back"
+            ;;
+        automation)
+            shortcuts_str=" ↑↓ Select  |  Enter Run  |  B Builder  |  S Scheduler  |  F1 Help  |  ESC Back"
+            ;;
+        diagnostics)
+            shortcuts_str=" 1-6 Category  |  A All  |  F5 Refresh  |  F1 Help  |  ESC Back"
+            ;;
+        perf_monitor)
+            shortcuts_str=" S Snapshot  |  R Reset  |  Auto-refresh 2s  |  F1 Help  |  ESC Back"
+            ;;
+        plugin_center)
+            shortcuts_str=" 1 List  |  2 Validate  |  3 Certify  |  4 API Docs  |  F1 Help  |  ESC Back"
+            ;;
+        doc_browser)
+            shortcuts_str=" 1-8 Browse  |  V View  |  F1 Help  |  ESC Back  |  Q Quit"
+            ;;
+        audit_trail)
+            shortcuts_str=" e TXT  |  c CSV  |  j JSON  |  f Clear  |  / Search  |  F1 Help  |  ESC Back"
+            ;;
+        session_manager)
+            shortcuts_str=" n New  |  s Save  |  r Restore  |  d Delete  |  F1 Help  |  ESC Back"
+            ;;
+        enterprise_settings)
+            shortcuts_str=" 1-7 Edit  |  s Save  |  r Reload  |  q Apply  |  F1 Help  |  ESC Back"
+            ;;
+        security_center)
+            shortcuts_str=" 1-0 Category  |  a Audit  |  h Harden  |  F5 Refresh  |  F1 Help  |  ESC Back"
+            ;;
+        event_bus)
+            shortcuts_str=" c Clear  |  s Stats  |  1-8 Filter category  |  F1 Help  |  ESC Back"
+            ;;
+        digital_twin)
+            shortcuts_str=" u Update  |  c Compare  |  e Export  |  r Reset  |  F1 Help  |  ESC Back"
+            ;;
+        timeline)
+            shortcuts_str=" e Export  |  f Filter  |  / Search  |  r Replay  |  1-6 Type  |  F1 Help"
+            ;;
+        health_intel)
+            shortcuts_str=" r Refresh  |  F1 Help  |  ESC Back  |  Q Quit"
+            ;;
+        predictive)
+            shortcuts_str=" r Refresh  |  d Detailed view  |  F1 Help  |  ESC Back"
+            ;;
+        recommendations)
+            shortcuts_str=" r Refresh  |  1-9 Execute  |  F1 Help  |  ESC Back"
+            ;;
+        fleet)
+            shortcuts_str=" r Refresh  |  p Policy  |  b Bulk Report  |  F1 Help  |  ESC Back"
+            ;;
+        policies)
+            shortcuts_str=" c Check  |  s Save  |  1-8 Edit  |  F1 Help  |  ESC Back"
+            ;;
+        report_studio)
+            shortcuts_str=" 1-9 Generate  |  F1 Help  |  ESC Back  |  Q Quit"
+            ;;
+        system_map)
+            shortcuts_str=" p Find path  |  F1 Help  |  ESC Back"
+            ;;
+        workflow_recorder)
+            shortcuts_str=" r Record  |  s Stop  |  l Load  |  p Play  |  d Delete  |  F1 Help"
+            ;;
+        recovery_center)
+            shortcuts_str=" n New  |  r Restore  |  v Validate  |  f Failures  |  F1 Help"
+            ;;
+        knowledge_base)
+            shortcuts_str=" / Search  |  c Clear  |  1-7 Category  |  F1 Help  |  ESC Back"
+            ;;
+        perf_profiler)
+            shortcuts_str=" s Start  |  u Update  |  v View log  |  g Suggestions  |  F1 Help"
+            ;;
+        plugin_sandbox)
+            shortcuts_str=" d Disable  |  r Reload  |  i Inspect  |  c Recertify  |  F1 Help"
+            ;;
+        profiles)
+            shortcuts_str=" 1-6 Switch profile  |  F1 Help  |  ESC Back"
+            ;;
+        offline_mode)
+            shortcuts_str=" t Toggle  |  c Cache Docs  |  s Sync  |  F1 Help  |  ESC Back"
+            ;;
         *)
             shortcuts_str=" F1 Help  |  ESC Back  |  Q Quit"
             ;;
